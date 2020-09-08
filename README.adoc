@@ -1,0 +1,10 @@
+= 自動Docker像生成
+B̅ (cmplstofB) <20594300+cmplstofB@users.noreply.github.com>
+v0.1.0, 2020-09-08
+
+== これはなに
+
+GitHub Actionsを利用して
+Docker像を作成，
+GitHub Packageに公開するところまでを
+無償で自動化した例。
