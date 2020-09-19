@@ -13,7 +13,6 @@ jobs:
   build-and-push-package:
     name: 梱包の備立と押し込み
     runs-on: ubuntu-latest
-    needs: get-usr_rep
     outputs:
       usr_rep: ${{ steps.getusrrep.outputs.usr_rep }}
     steps:
