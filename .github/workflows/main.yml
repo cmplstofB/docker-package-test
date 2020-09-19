@@ -32,4 +32,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: docker.pkg.github.com/${{ needs.get-usr_rep.outputs.usr_rep }}/image:latest
-          tag_with_ref: true
+          push: true
