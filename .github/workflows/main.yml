@@ -12,8 +12,8 @@ jobs:
     outputs:
       usr_rep:
     steps:
-      run: |
-        echo "::set-output name=usr_rep::$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
+      - run: |
+          echo "::set-output name=usr_rep::$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
 
   build-and-push-package:
     name: 梱包の備立と押し込み
