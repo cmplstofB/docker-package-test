@@ -6,10 +6,6 @@ on:
       - 'v*'
 
 jobs:
-  get-usr_rep:
-    name: 用者と倉庫を小文字で取得
-    runs-on: ubuntu-latest
-
   build-and-push-package:
     name: 梱包の備立と押し込み
     runs-on: ubuntu-latest
