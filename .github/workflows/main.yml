@@ -22,8 +22,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: docker.pkg.github.com
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker像を備立しGitHub Packagesに押し込む
         uses: docker/build-push-action@v2
         with:
