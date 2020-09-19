@@ -18,11 +18,14 @@ jobs:
           echo "::set-output name=usr_rep::$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
       - name: 倉庫から出納
         uses: actions/checkout@v2
-      - name: GitHub Packagesを押し込む
-        uses: docker/build-push-action@v1
+      - name: GitHub Dockerに録入り
+        uses: docker/login-action@v1
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: ${{ steps.get-usr_rep.outputs.usr_rep }}/image
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker像を備立しGitHub Packagesに押し込む
+        uses: docker/build-push-action@v2
+        with:
+          tags: docker.pkg.github.com/${{ steps.get-usr_rep.outputs.usr_rep }}/image:latest
           tag_with_ref: true
