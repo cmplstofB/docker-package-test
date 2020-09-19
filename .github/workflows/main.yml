@@ -6,16 +6,20 @@ on:
       - 'v*'
 
 jobs:
+  get-usr_rep:
+    name: 用者と倉庫を小文字で取得
+    runs-on: ubuntu-latest
+    outputs:
+      usr_rep:
+    steps:
+      run: |
+        echo "::set-output name=usr_rep::$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
+
   build-and-push-package:
     name: 梱包の備立と押し込み
     runs-on: ubuntu-latest
+    needs: get-usr_rep
     steps:
-      - name: 用者と倉庫を小文字で取得
-        id: get-usr_rep
-        outputs:
-          usr_rep:
-        run: |
-          echo "::set-output name=usr_rep::$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
       - name: 倉庫から出納
         uses: actions/checkout@v2
       - name: GitHub Dockerに録入り
@@ -27,5 +31,5 @@ jobs:
       - name: Docker像を備立しGitHub Packagesに押し込む
         uses: docker/build-push-action@v2
         with:
-          tags: docker.pkg.github.com/${{ steps.get-usr_rep.outputs.usr_rep }}/image:latest
+          tags: docker.pkg.github.com/${{ needs.get-usr_rep.outputs.usr_rep }}/image:latest
           tag_with_ref: true
