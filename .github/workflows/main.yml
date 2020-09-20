@@ -15,10 +15,8 @@ jobs:
       - name: 準備
         id: prep
         run: |
-          echo "::set-output name=username::\
-                $(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')"
-          echo "::set-output name=tag::\
-                $(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')"
+          echo "::set-output name=username::$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')"
+          echo "::set-output name=tag::$(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')"
       - name: 倉庫から出納
         uses: actions/checkout@v2
       - name: Docker Buildxを設定
