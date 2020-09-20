@@ -27,4 +27,3 @@ jobs:
           registry: docker.pkg.github.com
           repository: ${{ steps.prep.outputs.repository }}/image
           tag_with_ref: true
-          labels: org.opencontainers.image.description=${{ steps.prep.outputs.commit_message }}
