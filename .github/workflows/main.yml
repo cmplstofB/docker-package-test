@@ -20,7 +20,7 @@ jobs:
         id: prep
         run: |
           echo "::set-output name=username::$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')"
-          #echo "::set-output name=commit_message::$(git log --format=%B -n 1 ${{ github.event.after }})"
+          echo "::set-output name=changelog::$(git log --format=%B -n 1 ${{ github.event.after }})"
           echo "::set-output name=tag::$(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')"
       -
         uses: docker/setup-buildx-action@v1
@@ -37,3 +37,4 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ steps.prep.outputs.username }}/image:${{ steps.prep.outputs.tag }}
+          labels: org.opencontainers.image.description="${{ steps.prep.outputs.changelog }}"
