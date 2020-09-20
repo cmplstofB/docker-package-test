@@ -25,7 +25,7 @@ jobs:
       -
         uses: docker/setup-buildx-action@v1
         with:
-          version: latest
+          version: ${{ steps.prep.outputs.tag }}
       -
         name: ghcr.ioに録入り
         uses: docker/login-action@v1
@@ -38,5 +38,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/${{ steps.prep.outputs.username }}/image:${{ steps.prep.outputs.tag }}
-          labels: org.opencontainers.image.description="${{ steps.prep.outputs.changelog }}"
+          tags: ghcr.io/${{ steps.prep.outputs.username }}/image:latest
+          labels: org.opencontainers.image.description=${{ steps.prep.outputs.changelog }}
