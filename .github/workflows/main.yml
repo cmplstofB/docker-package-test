@@ -37,4 +37,4 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ steps.prep.outputs.username }}/image:latest
-          labels: org.opencontainers.image.description=${{ steps.prep.outputs.changelog }}
+          labels: org.opencontainers.image.description=あいうえ説明
