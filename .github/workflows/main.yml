@@ -16,7 +16,6 @@ jobs:
         id: prep
         run: |
           echo "::set-output name=repository::$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
-          echo "::set-output name=tag::$(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')"
       - name: 倉庫から出納
         uses: actions/checkout@v2
       - name: Docker像を備立しGitHub Packagesに押し込む
@@ -25,5 +24,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: ${{ steps.prep.outputs.repository }}/image:${{ steps.prep.outputs.tag }}
-          push: true
+          repository: ${{ steps.prep.outputs.repository }}/image
+          tag_with_ref: true
