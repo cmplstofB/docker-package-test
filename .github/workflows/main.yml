@@ -12,14 +12,12 @@ jobs:
     outputs:
       usr_rep: ${{ steps.getusrrep.outputs.usr_rep }}
     steps:
+      - name: 倉庫から出納
+        uses: actions/checkout@v2
       - name: 準備
         id: prep
         run: |
           echo "::set-output name=repository::$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')"
-      - name: 倉庫から出納
-        id: checkout
-        uses: actions/checkout@v2
-        run: |
           echo "::set-output name=commit_message::$(git log --format=%B -n 1 ${{ github.event.after }})"
       - name: Docker像を備立しGitHub Packagesに押し込む
         uses: docker/build-push-action@v1
@@ -29,4 +27,4 @@ jobs:
           registry: docker.pkg.github.com
           repository: ${{ steps.prep.outputs.repository }}/image
           tag_with_ref: true
-          labels: org.opencontainers.image.description=${{ steps.checkout.outputs.commit_message }}
+          labels: org.opencontainers.image.description=${{ steps.prep.outputs.commit_message }}
