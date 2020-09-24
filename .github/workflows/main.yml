@@ -20,6 +20,8 @@ jobs:
         id: prep
         run: |
           echo "::set-output name=username::$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')"
+          # ↓試験的に出力。
+          git log --format=%B -n 1 ${{ github.event.after }}
           echo "::set-output name=changelog::$(git log --format=%B -n 1 ${{ github.event.after }})"
           echo "::set-output name=tag::$(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')"
       -
