@@ -23,9 +23,7 @@ jobs:
           echo "changelog=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
           echo "tag=$(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')" >> $GITHUB_OUTPUT
       -
-        uses: docker/setup-buildx-action@v1
-        with:
-          version: latest
+        uses: docker/setup-buildx-action@v2
       -
         name: ghcr.ioに録入り
         uses: docker/login-action@v1
