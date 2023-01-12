@@ -19,9 +19,9 @@ jobs:
         name: 準備
         id: prep
         run: |
-          echo "::set-output name=username::$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')"
-          echo "::set-output name=changelog::$(git log --format=%B -n 1 ${{ github.event.after }})"
-          echo "::set-output name=tag::$(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')"
+          echo "username=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "changelog=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
+          echo "tag=$(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')" >> $GITHUB_OUTPUT
       -
         uses: docker/setup-buildx-action@v1
         with:
