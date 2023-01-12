@@ -20,8 +20,8 @@ jobs:
         id: prep
         run: |
           echo "username=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
-          echo "changelog=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
           echo "version=$(expr '${{ github.ref }}' : 'refs/tags/\(v.*\)')" >> $GITHUB_OUTPUT
+          # echo "changelog=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
       -
         uses: docker/setup-buildx-action@v2
         with:
@@ -41,4 +41,4 @@ jobs:
           tags: |
             ghcr.io/${{ steps.prep.outputs.username }}/image:${{ steps.prep.outputs.version }}
             ghcr.io/${{ steps.prep.outputs.username }}/image:latest
-          labels: org.opencontainers.image.description=${{ steps.prep.outputs.changelog }}
+          # labels: org.opencontainers.image.description=${{ steps.prep.outputs.changelog }}
