@@ -14,7 +14,7 @@ jobs:
     steps:
       -
         name: 倉庫から出納
-        uses: actions/checkout@3
+        uses: actions/checkout@v3
       -
         name: 準備
         id: prep
