@@ -37,6 +37,7 @@ jobs:
         name: Docker像を備立しGitHub Packagesに押し込む
         uses: docker/build-push-action@v3
         with:
+          context: .
           push: true
           tags: |
             ghcr.io/${{ steps.prep.outputs.username }}/image:${{ steps.prep.outputs.version }}
